@@ -1,0 +1,107 @@
+<div>
+    <div>
+        <mat-card>
+            <mat-card-content>
+              <mat-card-title>Reporte de Facturas </mat-card-title>
+                    <mat-grid-list [cols]="cols" rowHeight="100px">
+                  <mat-grid-tile>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha Inicio</mat-label>
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="fechaIn">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha Fin</mat-label>
+                        <input matInput [matDatepicker]="picker2" [(ngModel)]="fechaFin">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                      </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Tipo de Comprobante</mat-label>
+                        <mat-select [(ngModel)]="tipoC">
+                          <mat-option *ngFor="let food of foods" [value]="food.value">
+                            {{food.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <button mat-raised-button color="primary" class="material-cust-large-button" style="margin-bottom: 20px;" (click)="buscarFactura()">Buscar 
+                    </button>
+                  </mat-grid-tile>
+                </mat-grid-list>  
+            </mat-card-content>        
+        </mat-card>
+    </div>
+</div>  
+
+<div>
+  <div>
+      <mat-card>
+          <mat-card-content>
+            <div *ngIf="loading">
+              <mat-progress-spinner mode="indeterminate" color="warn" diameter="30">
+              </mat-progress-spinner>
+            </div>
+            <mat-card-subtitle>
+              Total Emitidos: {{totalEmitidos}} <br>
+              Total Recibidos: {{totalRecibidos}} <br>
+              Total Ingreso: {{convertir(totalIngreso)}} <br>
+              Total Egreso: {{convertir(totalEgresos)}} <br>
+              Total General: {{convertir(totalGeneral)}}
+            </mat-card-subtitle>
+            <button mat-raised-button color="primary" class="" style="margin-bottom: 20px; background-color: #2DD310;" (click)="exportar()">Exportar Excel 
+            </button>
+            <div>
+              <table mat-table [dataSource]="dataSource">
+            
+                <!-- Position Column -->
+                <ng-container matColumnDef="uuid">
+                  <th mat-header-cell *matHeaderCellDef> uuid. </th>
+                  <td mat-cell *matCellDef="let element"> {{element.uuid}} </td>
+                </ng-container>
+            
+                <!-- Name Column -->
+                <ng-container matColumnDef="fechafactura">
+                  <th mat-header-cell *matHeaderCellDef> fecha factura </th>
+                  <td mat-cell *matCellDef="let element"> {{element.fechaFactura.split("T")[0]}} {{element.fechaFactura.split("T")[1].substring(0,8)}} </td>
+                </ng-container>
+            
+                <!-- Weight Column -->
+                <ng-container matColumnDef="tipocomprobante">
+                  <th mat-header-cell *matHeaderCellDef> tipo comprobante </th>
+                  <td mat-cell *matCellDef="let element"> {{element.tipoComprobante}} </td>
+                </ng-container>
+            
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="folio">
+                  <th mat-header-cell *matHeaderCellDef> folio </th>
+                  <td mat-cell *matCellDef="let element"> {{element.folio}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="total">
+                  <th mat-header-cell *matHeaderCellDef> total </th>
+                  <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            
+              <mat-paginator 
+                           
+                             [pageSize]="10"
+                             [pageSizeOptions]="[5, 10, 25, 100]"
+                             showFirstLastButtons 
+                             aria-label="Select page of periodic elements">
+              </mat-paginator>
+            </div>
+          </mat-card-content>        
+      </mat-card>
+  </div>
+</div>  
