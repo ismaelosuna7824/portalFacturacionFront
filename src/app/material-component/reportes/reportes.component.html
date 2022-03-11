@@ -1,0 +1,145 @@
+<div>
+    <div>
+        <mat-card>
+            <mat-card-content>
+              <mat-card-title>Reporte de Facturas </mat-card-title>
+              
+                    <mat-grid-list [cols]="cols" rowHeight="100px">
+                  <mat-grid-tile>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha Inicio</mat-label>
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="fechaIn">
+                        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                        <mat-datepicker #picker  startView="multi-year" ></mat-datepicker>
+                      </mat-form-field>
+                      
+                      <!-- <mat-form-field>
+                        <input matInput [matDatepicker]="dp2" placeholder="Select a Date" (click)="openDatePicker(dp2)" [(ngModel)]="fechaIn">
+                        <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                        <mat-datepicker #dp2 startView="multi-year" (monthSelected)="closeDatePicker($event, dp2)"></mat-datepicker>
+                      </mat-form-field> -->
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field appearance="fill">
+                        <mat-label>ESTATUS</mat-label>
+                        <mat-select [(ngModel)]="status">
+                          <mat-option *ngFor="let food of statusMesA" [value]="food.value">
+                            {{food.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Emitidos/Recibidos</mat-label>
+                        <mat-select [(ngModel)]="emitidos">
+                          <mat-option *ngFor="let food of emitidosA" [value]="food.value">
+                            {{food.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Tipo de Comprobante</mat-label>
+                        <mat-select [(ngModel)]="tipoC">
+                          <mat-option *ngFor="let food of tipoCoA" [value]="food.value">
+                            {{food.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                  </mat-grid-tile>
+                  
+                  <mat-grid-tile>
+                    <button mat-raised-button color="primary" class="material-cust-large-button" (click)="buscarFactura()">Buscar 
+                    </button>
+                  </mat-grid-tile>
+                </mat-grid-list>  
+            </mat-card-content>        
+        </mat-card>
+    </div>
+  </div>  
+  
+  <div>
+  <div>
+      <mat-card>
+          <mat-card-content>
+            <div *ngIf="loading">
+              <mat-progress-spinner mode="indeterminate" color="warn" diameter="30">
+              </mat-progress-spinner>
+            </div>
+            <mat-card-subtitle>
+              <!-- Total Emitidos:  {{convertir(totalEmitidos, 1)}} <br>
+              Total Recibidos: {{totalRecibidos}} <br>
+              Total Ingreso: {{convertir(totalIngreso, 0)}} <br>
+              Total Egreso: {{convertir(totalEgresos, 0)}} <br>
+              Total General: {{convertir(totalGeneral, 0)}} -->
+            </mat-card-subtitle>
+            <button mat-raised-button color="primary" class="" style="margin-bottom: 20px; background-color: #2DD310;" (click)="exportar()" [disabled]="desabilitaBoton">Exportar Excel 
+            </button>
+            <div  class="table-responsive">
+              <table mat-table [dataSource]="dataSource">
+            
+                <!-- Position Column -->
+                <ng-container matColumnDef="MES">
+                  <th mat-header-cell *matHeaderCellDef> MES </th>
+                  <td mat-cell *matCellDef="let element"> {{element.mes}} </td>
+                </ng-container>
+            
+                <!-- Name Column -->
+                <ng-container matColumnDef="SUBTOTAL" style="padding: 100px;">
+                  <th mat-header-cell *matHeaderCellDef> SUBTOTAL </th>
+                  <td mat-cell *matCellDef="let element"> {{convertir(element.subtotal, 0)}}  </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="DESCUENTO">
+                  <th mat-header-cell *matHeaderCellDef> DESCUENTO </th>
+                  <td mat-cell *matCellDef="let element"> {{convertir(element.descuento, 0)}}  </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="IVATRASLADO">
+                  <th mat-header-cell *matHeaderCellDef> IVA TRASLADO </th>
+                  <td mat-cell *matCellDef="let element"> {{convertir(element.ivatraslado, 0)}}  </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="RETENCIONIVA">
+                  <th mat-header-cell *matHeaderCellDef> RETENCION IVA </th>
+                  <td mat-cell *matCellDef="let element"> {{convertir(element.retencioniva, 0)}}  </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="RETENCIONISR">
+                  <th mat-header-cell *matHeaderCellDef> RETENCION ISR </th>
+                  <td mat-cell *matCellDef="let element"> {{convertir(element.retencionisr, 0)}}  </td>
+                </ng-container>
+  
+  
+                <ng-container matColumnDef="TOTAL">
+                  <th mat-header-cell *matHeaderCellDef> TOTAL </th>
+                  <td mat-cell *matCellDef="let element"> {{convertir(element.total, 0)}}  </td>
+                </ng-container>
+  
+             
+  
+                <!-- <ng-container matColumnDef="RFC">
+                  <th mat-header-cell *matHeaderCellDef> RFC EMISOR </th>
+                  <td mat-cell *matCellDef="let element"> {{element.rfcEmisor}} </td>
+                </ng-container> -->
+                <!-- Symbol Column -->
+              
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            
+              <mat-paginator 
+                           
+                             [pageSize]="12"
+                             [pageSizeOptions]="[5, 10, 25, 100]"
+                             showFirstLastButtons 
+                             aria-label="Select page of periodic elements">
+              </mat-paginator>
+            </div>
+          </mat-card-content>        
+      </mat-card>
+  </div>
+  </div>  

@@ -17,11 +17,26 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
 import { SliderComponent } from './slider/slider.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { EmitidosComponent } from './emitidos/emitidos.component';
+import { RecibidosComponent } from './recibidos/recibidos.component';
+import { ReportesComponent } from './reportes/reportes.component';
 
 export const MaterialRoutes: Routes = [
   {
     path: 'inicio',
     component: InicioComponent
+  },
+  {
+    path: 'emitidos',
+    component: EmitidosComponent
+  },
+  {
+    path: 'recibidos',
+    component: RecibidosComponent
+  },
+  {
+    path: 'reportes',
+    component: ReportesComponent
   },
   {
     path: 'button',

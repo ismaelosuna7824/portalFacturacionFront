@@ -8,8 +8,10 @@ export interface Menu {
 }
 
 const MENUITEMS = [
-  { state: 'inicio', name: 'inicio', type: 'link', icon: 'av_timer' },
-  // { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
+  // { state: 'inicio', name: 'Inicio', type: 'link', icon: 'av_timer' },
+  { state: 'emitidos', name: 'Emitidos', type: 'link', icon: 'av_timer' },
+  { state: 'recibidos', name: 'Recibidos', type: 'link', icon: 'av_timer' },
+  { state: 'reportes', name: 'reportes', type: 'link', icon: 'av_timer' },
   // { state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5' },
   // { state: 'grid', type: 'link', name: 'Grid List', icon: 'view_comfy' },
   // { state: 'lists', type: 'link', name: 'Lists', icon: 'view_list' },

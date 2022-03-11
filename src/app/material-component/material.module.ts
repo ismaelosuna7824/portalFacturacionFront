@@ -33,6 +33,10 @@ import { SliderComponent } from './slider/slider.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { EmitidosComponent } from './emitidos/emitidos.component';
+import { RecibidosComponent } from './recibidos/recibidos.component';
+import { ReportesComponent } from './reportes/reportes.component';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 @NgModule({
   imports: [
@@ -44,7 +48,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     ReactiveFormsModule,
     FlexLayoutModule,
     CdkTableModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    NgxPaginationModule
   ],
   providers: [],
   entryComponents: [DialogOverviewExampleDialogComponent],
@@ -66,7 +71,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     SnackbarComponent,
     SliderComponent,
     SlideToggleComponent,
-    InicioComponent
+    InicioComponent,
+    EmitidosComponent,
+    RecibidosComponent,
+    ReportesComponent
   ]
 })
 export class MaterialComponentsModule {}

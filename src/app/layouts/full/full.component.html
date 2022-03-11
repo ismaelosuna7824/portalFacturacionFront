@@ -14,17 +14,17 @@
                 <!-- Logo icon --><b>
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
-                    <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo">
+                    <!-- <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo"> -->
                     <!-- Light Logo icon -->
-                    <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo">
+                    <!-- <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo"> -->
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text -->
                 <span fxShow="false" fxShow.gt-xs>
                  <!-- dark Logo text -->
-                 <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo">
+                 <!-- <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo"> -->
                  <!-- Light Logo text -->    
-                 <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage">
+                 <!-- <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage"> -->
                 </span> </a>
         </div>
         <!-- ============================================================== -->
@@ -34,8 +34,49 @@
         <button mat-icon-button (click)="snav.toggle()" value="sidebarclosed">
             <mat-icon>menu</mat-icon>
         </button>
+        <!-- <button mat-icon-button value="">
+            Total Emitidos: 1029109
+        </button> -->
+        <!-- <button mat-icon-button value="">
+            Total Recibidos: 1029109
+        </button>
+        <button mat-icon-button value="">
+            Total Ingreso: 1029109
+        </button>
+        <button mat-icon-button value="">
+            Total Egreso: 1029109
+        </button>
+        <button mat-icon-button value="">
+            Total General: 1029109
+        </button> -->
+        <div style="overflow-x: auto;">
+            <span style="font-size: 16px;">
+                Total Emitidos: {{convertir2(classReference.totalEmitidos) }} - 
+                Recibidos: {{convertir2(classReference.totalRecibidos)}} - 
+                Total Ingreso: {{convertir(classReference.totalIngreso, 0)}} - 
+                Total Egreso: {{convertir(classReference.totalEgresos, 0)}} - 
+                Total General: {{convertir(classReference.totalGeneral, 0)}}, - 
+                SUBTOTAL: {{convertir(classReference.subtotal, 0)}} - 
+                DESCUENTO: {{convertir(classReference.descuento, 0)}} - 
+                IVA TRASLADO: {{convertir(classReference.ivatraslado, 0)}} - 
+                RETENCION IVA: {{convertir(classReference.retencioniva, 0)}} - 
+                RETENCION ISR: {{convertir(classReference.retencionisr, 0)}} - 
+                TOTAL: {{convertir(classReference.total, 0)}} -
+                SUBTOTAL(C): {{convertir(classReference.subtotalC, 0)}} -
+                DESCUENTO(C): {{convertir(classReference.descuentoC, 0)}} - 
+                IVA TRASLADO(C): {{convertir(classReference.ivatrasladoC, 0)}} - 
+                RETENCION IVA(C): {{convertir(classReference.retencionivaC, 0)}} - 
+                RETENCION ISR(C): {{convertir(classReference.retencionisrC, 0)}} - 
+                TOTAL(C): {{convertir(classReference.totalC, 0)}}
+
+            </span>
+        </div>
+      
+      
+
         <span fxFlex></span>
-        <!-- ============================================================== -->
+      
+        <!-- ========a====================================================== -->
         <!-- app header component - style you can find in header.scss / header.component.ts-->
         <!-- ============================================================== -->
         <app-header></app-header>

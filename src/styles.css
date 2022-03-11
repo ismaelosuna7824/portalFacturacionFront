@@ -3,20 +3,20 @@
   /* Firefox */
   * {
     scrollbar-width: auto;
-    scrollbar-color: #7d7d7d #ffffff;
+    scrollbar-color: #646363 #ffffff;
   }
 
   /* Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
-    width: 10px;
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
   }
-
   *::-webkit-scrollbar-track {
-    background: #ffffff;
+    background: #fdfdfd;
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color: #7d7d7d;
+    background-color: #1d1c1c;
     border-radius: 10px;
-    border: 3px solid #ffffff;
+    border: 3px solid #1d1c1c;
   }
